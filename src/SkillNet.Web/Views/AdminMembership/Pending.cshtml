@@ -1,0 +1,91 @@
+@model SkillNet.Application.Features.Membership.Queries.GetPendingApplications.PendingApplicationsResult
+@{
+    ViewData["Title"] = "Xét duyệt đơn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:2rem;flex-wrap:wrap">
+        <div>
+            <h1 style="font-size:1.75rem;font-weight:800;letter-spacing:-.03em;margin-bottom:.3rem">Xét duyệt đơn</h1>
+            <p style="color:var(--text-2);font-size:.9rem;margin:0">Các đơn đăng ký hội viên đang chờ xử lý.</p>
+        </div>
+        @if (Model.TotalCount > 0)
+        {
+            <span class="status-badge status-pending">
+                <span class="status-dot"></span>
+                @Model.TotalCount đơn chờ duyệt
+            </span>
+        }
+    </div>
+
+    @if (!Model.Items.Any())
+    {
+        <div class="empty-state" style="border:1px solid var(--border);border-radius:var(--r-xl)">
+            <span class="material-symbols-outlined">task_alt</span>
+            <h3>Tất cả đã xử lý</h3>
+            <p>Không có đơn nào cần xét duyệt lúc này.</p>
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="table-responsive">
+                <table class="table" style="margin:0">
+                    <thead>
+                        <tr>
+                            <th>Họ tên</th>
+                            <th>Số điện thoại</th>
+                            <th>Gói dịch vụ</th>
+                            <th>Ngày nộp</th>
+                            <th>Chờ</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Items)
+                        {
+                            <tr>
+                                <td style="color:var(--text);font-weight:600">@item.FullName</td>
+                                <td>@item.PhoneNumber</td>
+                                <td>@item.ServicePackageName</td>
+                                <td>@item.CreatedAt.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    @if (item.DaysPending > 3)
+                                    {
+                                        <span class="badge bg-danger">@item.DaysPending ngày</span>
+                                    }
+                                    else
+                                    {
+                                        <span style="color:var(--text-2);font-size:.85rem">@item.DaysPending ngày</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="Detail" asp-route-id="@item.Id"
+                                       class="btn btn-sm btn-outline-primary d-inline-flex align-items-center gap-1">
+                                        <span class="material-symbols-outlined" style="font-size:15px">open_in_new</span>
+                                        Xem
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        @if (Model.TotalPages > 1)
+        {
+            <nav style="margin-top:1.5rem">
+                <ul class="pagination justify-content-center">
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == Model.Page ? "active" : "")">
+                            <a class="page-link" asp-action="Pending" asp-route-page="@i">@i</a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        }
+    }
+</div>

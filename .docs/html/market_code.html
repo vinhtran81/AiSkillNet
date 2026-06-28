@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html class="dark" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trang tổng quan thị trường - QMV</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0ff06d",
+                        "secondary-red": "#ff4d4d",
+                        "background-light": "#f5f8f7",
+                        "background-dark": "#102218",
+                        "card-dark": "#1a2e23",
+                        "border-green": "#326748",
+                        "text-muted": "#91caa9"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display overflow-x-hidden antialiased selection:bg-primary selection:text-background-dark">
+<div class="flex min-h-screen flex-col">
+<header class="sticky top-0 z-50 w-full border-b border-solid border-border-green bg-background-dark/95 backdrop-blur supports-[backdrop-filter]:bg-background-dark/60 px-4 lg:px-10 py-3">
+<div class="flex items-center justify-between whitespace-nowrap">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-white">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined text-4xl">candlestick_chart</span>
+</div>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">QMV</h2>
+</div>
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full group">
+<div class="text-text-muted flex border border-r-0 border-border-green bg-[#1a2e23] items-center justify-center pl-3 rounded-l-lg group-focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-lg text-white focus:outline-0 focus:ring-0 border border-l-0 border-border-green bg-[#1a2e23] focus:border-primary h-full placeholder:text-text-muted px-3 text-sm font-normal leading-normal transition-colors" placeholder="Tìm kiếm mã CP..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end items-center gap-4 lg:gap-8">
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-primary text-sm font-bold leading-normal" href="#">Tổng quan</a>
+<a class="text-text-muted hover:text-white transition-colors text-sm font-medium leading-normal" href="#">Thị trường</a>
+<a class="text-text-muted hover:text-white transition-colors text-sm font-medium leading-normal" href="#">Danh mục</a>
+<a class="text-text-muted hover:text-white transition-colors text-sm font-medium leading-normal" href="#">Watchlist</a>
+<a class="text-text-muted hover:text-white transition-colors text-sm font-medium leading-normal flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[16px]">psychology</span> AI Insights
+                    </a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="relative text-text-muted hover:text-white">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 size-2 bg-primary rounded-full"></span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border border-border-green" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCkfmQ0k6G9NXYsEljGPVSiq2LqL6ogzL_koXFNB1nT8ToEteIjIdOdFYnAJ_D3OE-4whriuV7BNyM-_bc2Wgct8B00GnLb7-YZFiSoMM47R2ClUfnlARd_YfIjbczCG9FJg-u3W9W8o2lyHX3kkk1T5dwzLGhYJ2ZGRPisz8qHtRtcgZjyI_nZxyeujF84If466_FvINrKHxKP8LXavAam8t7I2SBywpDFUaf751SSqVu8bPtpzRQF9LjTuEiY4a-Q28OZ5URROyM");'></div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 px-4 lg:px-10 py-6 max-w-[1600px] mx-auto w-full flex flex-col gap-6">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 pb-2">
+<div class="flex flex-col gap-1">
+<h1 class="text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Tổng quan thị trường</h1>
+<p class="text-text-muted text-base font-normal">Dữ liệu thị trường thời gian thực được hỗ trợ bởi AI</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 h-10 rounded-lg border border-border-green bg-[#1a2e23] hover:bg-[#233b2e] text-white text-sm font-medium transition-colors">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+                    Tùy chỉnh
+                </button>
+<button class="flex items-center gap-2 px-4 h-10 rounded-lg bg-primary hover:bg-[#00d65b] text-background-dark text-sm font-bold transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                    Lệnh mới
+                </button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="flex flex-col gap-1 rounded-xl p-5 border border-border-green bg-card-dark shadow-sm">
+<div class="flex justify-between items-center">
+<p class="text-text-muted text-sm font-medium uppercase tracking-wider">VN-INDEX</p>
+<span class="material-symbols-outlined text-primary text-[20px]">trending_up</span>
+</div>
+<p class="text-white text-2xl font-bold leading-tight font-mono mt-1">1,245.30</p>
+<p class="text-primary text-sm font-medium flex items-center gap-1">
+                    +14.50 (1.20%)
+                </p>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-5 border border-border-green bg-card-dark shadow-sm">
+<div class="flex justify-between items-center">
+<p class="text-text-muted text-sm font-medium uppercase tracking-wider">VN30</p>
+<span class="material-symbols-outlined text-primary text-[20px]">trending_up</span>
+</div>
+<p class="text-white text-2xl font-bold leading-tight font-mono mt-1">1,250.80</p>
+<p class="text-primary text-sm font-medium flex items-center gap-1">
+                    +18.20 (1.55%)
+                </p>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-5 border border-border-green bg-card-dark shadow-sm">
+<div class="flex justify-between items-center">
+<p class="text-text-muted text-sm font-medium uppercase tracking-wider">HNX-INDEX</p>
+<span class="material-symbols-outlined text-secondary-red text-[20px]">trending_down</span>
+</div>
+<p class="text-white text-2xl font-bold leading-tight font-mono mt-1">230.15</p>
+<p class="text-secondary-red text-sm font-medium flex items-center gap-1">
+                    -1.05 (0.45%)
+                </p>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-5 border border-border-green bg-card-dark shadow-sm">
+<div class="flex justify-between items-center">
+<p class="text-text-muted text-sm font-medium uppercase tracking-wider">UPCOM</p>
+<span class="material-symbols-outlined text-primary text-[20px]">trending_up</span>
+</div>
+<p class="text-white text-2xl font-bold leading-tight font-mono mt-1">90.50</p>
+<p class="text-primary text-sm font-medium flex items-center gap-1">
+                    +0.09 (0.10%)
+                </p>
+</div>
+</div>
+<div class="w-full rounded-xl border border-primary/30 bg-gradient-to-r from-[#112218] to-[#1a3826] p-5 shadow-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 relative z-10">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-primary/10 rounded-full border border-primary/20">
+<span class="material-symbols-outlined text-primary text-3xl">psychology_alt</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<h3 class="text-white text-lg font-bold">Tâm lý thị trường AI: <span class="text-primary">Tích cực (Bullish)</span></h3>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-primary text-background-dark uppercase">Confidence 85%</span>
+</div>
+<p class="text-text-muted text-sm md:text-base max-w-3xl">Dòng tiền lớn đang tích lũy mạnh vào nhóm Ngân hàng và Bán lẻ. Chỉ báo AI dự báo xu hướng tăng ngắn hạn trong 3 phiên tới.</p>
+</div>
+</div>
+<button class="flex items-center justify-center whitespace-nowrap rounded-lg h-10 px-6 bg-primary hover:bg-[#00d65b] text-background-dark text-sm font-bold transition-colors">
+                    Xem chi tiết phân tích
+                </button>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+<div class="xl:col-span-2 flex flex-col gap-4 rounded-xl border border-border-green bg-card-dark p-5 h-[500px]">
+<div class="flex flex-wrap items-center justify-between gap-4 border-b border-border-green pb-4">
+<div class="flex items-center gap-3">
+<h3 class="text-white font-bold text-lg">Biểu đồ tổng hợp</h3>
+<div class="flex items-center gap-1 bg-[#112218] rounded-md p-1 border border-border-green">
+<button class="px-3 py-1 rounded text-xs font-bold bg-primary text-background-dark">VNINDEX</button>
+<button class="px-3 py-1 rounded text-xs font-medium text-text-muted hover:text-white">VN30</button>
+</div>
+</div>
+<div class="flex gap-1">
+<button class="px-3 py-1 text-xs font-bold text-background-dark bg-primary rounded">1D</button>
+<button class="px-3 py-1 text-xs font-medium text-text-muted hover:text-white hover:bg-white/5 rounded">1W</button>
+<button class="px-3 py-1 text-xs font-medium text-text-muted hover:text-white hover:bg-white/5 rounded">1M</button>
+<button class="px-3 py-1 text-xs font-medium text-text-muted hover:text-white hover:bg-white/5 rounded">3M</button>
+<button class="px-3 py-1 text-xs font-medium text-text-muted hover:text-white hover:bg-white/5 rounded">YTD</button>
+</div>
+</div>
+<div class="flex-1 w-full h-full relative rounded-lg overflow-hidden bg-[#112218] border border-border-green/50">
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-full h-full p-4 flex items-end gap-1">
+<div class="w-[2%] h-[40%] bg-primary/20 rounded-t-sm"></div>
+<div class="w-[2%] h-[45%] bg-primary/30 rounded-t-sm"></div>
+<div class="w-[2%] h-[30%] bg-secondary-red/30 rounded-t-sm"></div>
+<div class="w-[2%] h-[35%] bg-primary/30 rounded-t-sm"></div>
+<div class="w-[2%] h-[50%] bg-primary/40 rounded-t-sm"></div>
+<div class="w-[2%] h-[55%] bg-primary/50 rounded-t-sm"></div>
+<div class="w-[2%] h-[45%] bg-secondary-red/30 rounded-t-sm"></div>
+<div class="w-[2%] h-[60%] bg-primary/60 rounded-t-sm"></div>
+<div class="w-[2%] h-[65%] bg-primary/70 rounded-t-sm"></div>
+<div class="w-[2%] h-[50%] bg-secondary-red/40 rounded-t-sm"></div>
+<div class="w-[2%] h-[70%] bg-primary/80 rounded-t-sm"></div>
+<div class="w-[2%] h-[75%] bg-primary/90 rounded-t-sm"></div>
+<div class="w-[2%] h-[60%] bg-secondary-red/30 rounded-t-sm"></div>
+<div class="w-[2%] h-[80%] bg-primary rounded-t-sm"></div>
+<svg class="absolute inset-0 w-full h-full p-4 pointer-events-none" preserveAspectRatio="none">
+<path d="M0,200 C50,180 100,220 150,150 C200,80 250,120 300,100 C350,80 400,50 450,60 C500,70 550,40 600,20 L600,300 L0,300 Z" fill="url(#gradient)" opacity="0.1"></path>
+<path d="M0,200 C50,180 100,220 150,150 C200,80 250,120 300,100 C350,80 400,50 450,60 C500,70 550,40 600,20" fill="none" stroke="#0ff06d" stroke-width="2"></path>
+<defs>
+<linearGradient id="gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#0ff06d;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#0ff06d;stop-opacity:0"></stop>
+</linearGradient>
+</defs>
+</svg>
+</div>
+</div>
+<div class="absolute top-10 right-20 bg-card-dark border border-border-green p-2 rounded shadow-lg z-20">
+<p class="text-xs text-text-muted">14:00 PM</p>
+<p class="text-sm font-bold text-white">1,245.30</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<div class="flex flex-col rounded-xl border border-border-green bg-card-dark p-0 overflow-hidden flex-1">
+<div class="flex items-center justify-between p-4 border-b border-border-green bg-[#112218]/50">
+<h3 class="text-white font-bold text-base">Biến động mạnh</h3>
+<div class="flex text-xs font-bold rounded overflow-hidden border border-border-green">
+<button class="px-2 py-1 bg-primary text-background-dark">Tăng</button>
+<button class="px-2 py-1 bg-transparent text-text-muted hover:text-white">Giảm</button>
+</div>
+</div>
+<div class="flex flex-col divide-y divide-border-green/50 overflow-y-auto h-full max-h-[220px]">
+<div class="flex items-center justify-between p-3 hover:bg-white/5 cursor-pointer group">
+<div class="flex flex-col">
+<span class="text-white font-bold group-hover:text-primary transition-colors">HVN</span>
+<span class="text-xs text-text-muted">Vietnam Airlines</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-white font-mono text-sm">24.50</span>
+<span class="text-primary text-xs font-bold">+6.98%</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 hover:bg-white/5 cursor-pointer group">
+<div class="flex flex-col">
+<span class="text-white font-bold group-hover:text-primary transition-colors">VOS</span>
+<span class="text-xs text-text-muted">Vosco</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-white font-mono text-sm">12.10</span>
+<span class="text-primary text-xs font-bold">+6.85%</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-3 hover:bg-white/5 cursor-pointer group">
+<div class="flex flex-col">
+<span class="text-white font-bold group-hover:text-primary transition-colors">HPG</span>
+<span class="text-xs text-text-muted">Hoa Phat Group</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-white font-mono text-sm">30.25</span>
+<span class="text-primary text-xs font-bold">+3.20%</span>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col rounded-xl border border-border-green bg-card-dark p-4 gap-3 flex-1">
+<div class="flex items-center justify-between">
+<h3 class="text-white font-bold text-base">Ngành dẫn dắt</h3>
+<span class="material-symbols-outlined text-text-muted text-sm">more_horiz</span>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-3">
+<span class="text-text-muted text-xs font-medium w-24 truncate">Ngân hàng</span>
+<div class="flex-1 h-2 bg-[#112218] rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[75%] rounded-full"></div>
+</div>
+<span class="text-primary text-xs font-bold w-10 text-right">+2.4%</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-text-muted text-xs font-medium w-24 truncate">Bất động sản</span>
+<div class="flex-1 h-2 bg-[#112218] rounded-full overflow-hidden">
+<div class="h-full bg-primary/60 w-[45%] rounded-full"></div>
+</div>
+<span class="text-primary/80 text-xs font-bold w-10 text-right">+1.1%</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-text-muted text-xs font-medium w-24 truncate">Dầu khí</span>
+<div class="flex-1 h-2 bg-[#112218] rounded-full overflow-hidden">
+<div class="h-full bg-secondary-red w-[30%] rounded-full"></div>
+</div>
+<span class="text-secondary-red text-xs font-bold w-10 text-right">-0.5%</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-text-muted text-xs font-medium w-24 truncate">Công nghệ</span>
+<div class="flex-1 h-2 bg-[#112218] rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[60%] rounded-full"></div>
+</div>
+<span class="text-primary text-xs font-bold w-10 text-right">+1.8%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col rounded-xl border border-border-green bg-card-dark overflow-hidden mt-2">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between p-5 border-b border-border-green gap-4">
+<h3 class="text-white font-bold text-xl">Danh sách cổ phiếu</h3>
+<div class="flex items-center gap-3 self-end sm:self-auto">
+<div class="flex items-center gap-2 text-sm text-text-muted">
+<span class="size-2 rounded-full bg-primary animate-pulse"></span>
+                        Thị trường mở cửa
+                    </div>
+<button class="text-text-muted hover:text-white transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="text-text-muted hover:text-white transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-green bg-[#112218]">
+<th class="p-4 text-xs font-medium text-text-muted uppercase tracking-wider">Mã CP</th>
+<th class="p-4 text-xs font-medium text-text-muted uppercase tracking-wider">Giá</th>
+<th class="p-4 text-xs font-medium text-text-muted uppercase tracking-wider text-right">+/-</th>
+<th class="p-4 text-xs font-medium text-text-muted uppercase tracking-wider text-right">%</th>
+<th class="p-4 text-xs font-medium text-text-muted uppercase tracking-wider text-right">Khối lượng</th>
+<th class="p-4 text-xs font-medium text-text-muted uppercase tracking-wider text-center">Tổng hợp</th>
+<th class="p-4 text-xs font-medium text-text-muted uppercase tracking-wider text-right">AI Score</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-green/30 text-sm">
+<tr class="group hover:bg-white/5 transition-colors cursor-pointer">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="bg-white p-1 rounded-full size-8 flex items-center justify-center">
+<img class="w-full h-full object-contain" data-alt="VCB Logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDt-YqdIci9r7TkpTsEkDpw_3JGOrMhvmXmMGL82z03whid3bspzzm_mVxc70Vw6NTokzu-P4vmFnpHak0yX3ZGp-wbKg2ibym1CoJ77FZr5n_5W9iqeHkwurdo76_F8CsInc8DMj6dWw1HHlpu0G9ZljX2PmpsiSoaTBMYN9L89Y_IE_ibtosJRolxZAsYnJgi0lHVDNG7Fd9SBsSxOmVuinTpxSDM2LHE0QUYr-CJNX1yzDGR7Rq7w5xqcW4i52AasU5IsKP3eV0"/>
+</div>
+<div>
+<p class="font-bold text-white group-hover:text-primary">VCB</p>
+<p class="text-xs text-text-muted">Vietcombank</p>
+</div>
+</div>
+</td>
+<td class="p-4 font-mono font-bold text-white">96,200</td>
+<td class="p-4 font-mono font-medium text-primary text-right">+1,200</td>
+<td class="p-4 font-mono font-bold text-primary text-right bg-primary/5 rounded">+1.26%</td>
+<td class="p-4 font-mono text-white text-right">1,250,400</td>
+<td class="p-4 text-center">
+<div class="w-20 h-8 mx-auto opacity-80">
+<svg class="w-full h-full overflow-visible" viewBox="0 0 100 40">
+<path d="M0,35 Q20,30 40,20 T100,5" fill="none" stroke="#0ff06d" stroke-width="2"></path>
+</svg>
+</div>
+</td>
+<td class="p-4 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/20">
+                                        9.2
+                                    </span>
+</td>
+</tr>
+<tr class="group hover:bg-white/5 transition-colors cursor-pointer">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="bg-blue-900 p-1 rounded-full size-8 flex items-center justify-center">
+<img class="w-full h-full object-contain" data-alt="VIC Logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCceb8aQhjFm7Te8cEYT_KMKfERTpKlsA6aIO2snPXadrPpc748j-eRMba9IiyqPc8FYs8HhvsnAnaP6p4ptpChPELR6LssOU_yZjnVTEI-BJ5-jsEhVMjuqBQOtpS-675VRRwLfcVpBz_MStR7G8Uh998e9gME2n0Q9BDiignmhB1XvsoLVK12Badkbd3ir-BIs6u-sveB3SovtLnoxTmH5OxE0wNMOdNhXubWRPhWV_vtwcFNZt0PDInyMXv1R2iTqhxE1v3dLo"/>
+</div>
+<div>
+<p class="font-bold text-white group-hover:text-primary">VIC</p>
+<p class="text-xs text-text-muted">Vingroup</p>
+</div>
+</div>
+</td>
+<td class="p-4 font-mono font-bold text-white">45,100</td>
+<td class="p-4 font-mono font-medium text-secondary-red text-right">-200</td>
+<td class="p-4 font-mono font-bold text-secondary-red text-right bg-secondary-red/5 rounded">-0.44%</td>
+<td class="p-4 font-mono text-white text-right">3,420,100</td>
+<td class="p-4 text-center">
+<div class="w-20 h-8 mx-auto opacity-80">
+<svg class="w-full h-full overflow-visible" viewBox="0 0 100 40">
+<path d="M0,10 Q20,15 40,25 T100,35" fill="none" stroke="#ff4d4d" stroke-width="2"></path>
+</svg>
+</div>
+</td>
+<td class="p-4 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-500/20 text-yellow-500 border border-yellow-500/20">
+                                        5.4
+                                    </span>
+</td>
+</tr>
+<tr class="group hover:bg-white/5 transition-colors cursor-pointer">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="bg-orange-500 p-1 rounded-full size-8 flex items-center justify-center">
+<span class="text-white font-bold text-xs">FPT</span>
+</div>
+<div>
+<p class="font-bold text-white group-hover:text-primary">FPT</p>
+<p class="text-xs text-text-muted">FPT Corp</p>
+</div>
+</div>
+</td>
+<td class="p-4 font-mono font-bold text-white">105,500</td>
+<td class="p-4 font-mono font-medium text-primary text-right">+2,500</td>
+<td class="p-4 font-mono font-bold text-primary text-right bg-primary/5 rounded">+2.43%</td>
+<td class="p-4 font-mono text-white text-right">850,200</td>
+<td class="p-4 text-center">
+<div class="w-20 h-8 mx-auto opacity-80">
+<svg class="w-full h-full overflow-visible" viewBox="0 0 100 40">
+<path d="M0,30 Q30,30 50,15 T100,5" fill="none" stroke="#0ff06d" stroke-width="2"></path>
+</svg>
+</div>
+</td>
+<td class="p-4 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/20">
+                                        9.8
+                                    </span>
+</td>
+</tr>
+<tr class="group hover:bg-white/5 transition-colors cursor-pointer">
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="bg-blue-600 p-1 rounded-full size-8 flex items-center justify-center">
+<span class="text-white font-bold text-xs">SSI</span>
+</div>
+<div>
+<p class="font-bold text-white group-hover:text-primary">SSI</p>
+<p class="text-xs text-text-muted">SSI Securities</p>
+</div>
+</div>
+</td>
+<td class="p-4 font-mono font-bold text-white">34,150</td>
+<td class="p-4 font-mono font-medium text-primary text-right">+550</td>
+<td class="p-4 font-mono font-bold text-primary text-right bg-primary/5 rounded">+1.64%</td>
+<td class="p-4 font-mono text-white text-right">5,100,300</td>
+<td class="p-4 text-center">
+<div class="w-20 h-8 mx-auto opacity-80">
+<svg class="w-full h-full overflow-visible" viewBox="0 0 100 40">
+<path d="M0,25 Q20,35 50,20 T100,10" fill="none" stroke="#0ff06d" stroke-width="2"></path>
+</svg>
+</div>
+</td>
+<td class="p-4 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/20 text-primary border border-primary/20">
+                                        8.5
+                                    </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="flex items-center justify-between p-4 bg-[#112218] border-t border-border-green">
+<p class="text-sm text-text-muted">Hiển thị <span class="text-white font-medium">1-4</span> trong <span class="text-white font-medium">320</span> mã</p>
+<div class="flex gap-2">
+<button class="p-2 rounded border border-border-green text-text-muted hover:text-white hover:border-white disabled:opacity-50">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="p-2 rounded border border-border-green text-text-muted hover:text-white hover:border-white">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

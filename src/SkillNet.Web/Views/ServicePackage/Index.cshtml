@@ -1,0 +1,73 @@
+@model SkillNet.Web.ViewModels.ServicePackageListViewModel
+@{
+    ViewData["Title"] = "Gói Hội Viên";
+}
+
+<div class="max-w-5xl mx-auto px-6 py-14">
+    <!-- Header -->
+    <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-sm font-bold mb-4"
+             style="background:rgba(255,80,0,.1);border-color:rgba(255,80,0,.2);color:#FF5000">
+            <span class="material-symbols-outlined" style="font-size:16px">loyalty</span>
+            Chương trình hội viên
+        </div>
+        <h1 class="text-4xl font-black text-white mb-3" style="letter-spacing:-.03em">Chọn gói phù hợp với bạn</h1>
+        <p class="max-w-md mx-auto leading-relaxed" style="color:#b0a090">
+            Đăng ký hội viên để nhận đầy đủ quyền lợi và ưu đãi độc quyền.
+        </p>
+    </div>
+
+    @if (!Model.Packages.Any())
+    {
+        <div class="flex flex-col items-center justify-center py-20 text-center rounded-2xl border" style="border-color:#33302a">
+            <span class="material-symbols-outlined mb-4" style="font-size:52px;color:#70645a">inventory_2</span>
+            <h3 class="font-bold text-white mb-1">Chưa có gói dịch vụ</h3>
+            <p class="text-sm" style="color:#b0a090">Hiện chưa có gói dịch vụ nào. Vui lòng quay lại sau.</p>
+        </div>
+    }
+    else
+    {
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach (var pkg in Model.Packages)
+            {
+                <div class="flex flex-col rounded-2xl border p-7 relative overflow-hidden transition-all hover:-translate-y-1 @(pkg.IsPopular ? "" : "")"
+                     style="background:#201e1a;border-color:@(pkg.IsPopular ? "#FF5000" : "#33302a");@(pkg.IsPopular ? "box-shadow:0 0 0 1px #FF5000,0 8px 32px rgba(255,80,0,.12)" : "")">
+
+                    @if (pkg.IsPopular)
+                    {
+                        <div class="absolute top-0 right-6 px-3 py-1 rounded-b-lg text-xs font-black tracking-widest uppercase text-white"
+                             style="background:#FF5000;letter-spacing:.08em">Phổ biến nhất</div>
+                    }
+
+                    <div class="font-extrabold text-white text-lg mb-1">@pkg.Name</div>
+                    @if (pkg.Description != null)
+                    {
+                        <div class="text-sm mb-5 leading-relaxed" style="color:#b0a090">@pkg.Description</div>
+                    }
+
+                    <div class="mb-6">
+                        <span class="font-black" style="font-size:2.25rem;letter-spacing:-.04em;color:#FF5000">@pkg.Price.ToString("N0")đ</span>
+                        <span class="text-sm ml-1" style="color:#b0a090">/ @pkg.DurationMonths tháng</span>
+                    </div>
+
+                    <ul class="flex flex-col gap-2.5 mb-7 flex-1">
+                        @foreach (var benefit in pkg.Benefits)
+                        {
+                            <li class="flex items-start gap-2 text-sm" style="color:#b0a090">
+                                <span class="material-symbols-outlined flex-shrink-0 mt-0.5" style="font-size:17px;color:#22c55e">check_circle</span>
+                                @benefit
+                            </li>
+                        }
+                    </ul>
+
+                    <a asp-controller="Membership" asp-action="Register" asp-route-packageId="@pkg.Id"
+                       class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-bold text-white no-underline transition-all"
+                       style="background:@(pkg.IsPopular ? "#FF5000" : "#2a2620");color:@(pkg.IsPopular ? "#fff" : "#d0c8c0");border:1px solid @(pkg.IsPopular ? "#FF5000" : "#42403a")">
+                        <span class="material-symbols-outlined" style="font-size:18px">arrow_forward</span>
+                        Đăng ký ngay
+                    </a>
+                </div>
+            }
+        </div>
+    }
+</div>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Skill.Net</title>
+    @if (ViewData["NoIndex"] is true)
+    {
+        <meta name="robots" content="noindex, nofollow" />
+    }
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+    <!-- Tailwind config (must be before CDN) -->
+    <script>
+        tailwind = { config: {
+            darkMode: "class",
+            corePlugins: { preflight: false },
+            theme: {
+                extend: {
+                    colors: {
+                        "primary":     "#FF5000",
+                        "primary-h":   "#e64700",
+                        "bg-dark":     "#0c0b09",
+                        "surface-dark":"#1a1815",
+                        "card-dark":   "#201e1a",
+                        "border-dark": "#33302a",
+                        "border-dark2":"#42403a",
+                        "muted":       "#b0a090",
+                        "subtle":      "#70645a",
+                    },
+                    fontFamily: { display: ["Manrope", "sans-serif"] }
+                }
+            }
+        }};
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap (forms, validation, modals) -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Site overrides -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body class="font-display bg-bg-dark text-white min-h-screen flex flex-col antialiased overflow-x-hidden">
+
+    <!-- ── Navbar ── -->
+    <header class="sticky top-0 z-50 w-full border-b border-border-dark bg-bg-dark/90 backdrop-blur-md px-5 py-3">
+        <div class="max-w-[1400px] mx-auto flex items-center gap-4">
+            <!-- Brand -->
+            <a asp-controller="Home" asp-action="Index"
+               class="flex items-center gap-2.5 no-underline flex-shrink-0 group">
+                <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center shadow-[0_0_16px_rgba(255,80,0,.35)]">
+                    <span class="material-symbols-outlined text-white" style="font-size:18px">fitness_center</span>
+                </div>
+                <span class="text-lg font-extrabold text-white tracking-tight group-hover:text-primary transition-colors">Skill.Net</span>
+            </a>
+
+            <!-- Nav links -->
+            <nav class="hidden md:flex items-center gap-1 flex-1">
+                <a asp-controller="ServicePackage" asp-action="Index"
+                   class="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-semibold text-muted hover:text-white hover:bg-white/5 transition-all no-underline">
+                    Gói hội viên
+                </a>
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <a asp-controller="Membership" asp-action="Status"
+                       class="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-semibold text-muted hover:text-white hover:bg-white/5 transition-all no-underline">
+                        <span class="material-symbols-outlined" style="font-size:17px">assignment</span>
+                        Đơn của tôi
+                    </a>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-controller="AdminMembership" asp-action="Pending"
+                       class="flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-semibold text-muted hover:text-white hover:bg-white/5 transition-all no-underline">
+                        <span class="material-symbols-outlined" style="font-size:17px">notifications</span>
+                        Xét duyệt
+                        <vc:pending-approvals-badge></vc:pending-approvals-badge>
+                    </a>
+                }
+            </nav>
+
+            <!-- Actions -->
+            <div class="hidden md:flex items-center gap-2 ml-auto">
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <span class="text-xs text-subtle px-2">@User.Identity.Name</span>
+                    <form asp-controller="Account" asp-action="Logout" method="post" class="m-0">
+                        <button type="submit"
+                                class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm font-semibold text-muted border border-border-dark hover:text-white hover:border-border-dark2 hover:bg-surface-dark transition-all bg-transparent cursor-pointer">
+                            <span class="material-symbols-outlined" style="font-size:17px">logout</span>
+                            Đăng xuất
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Login"
+                       class="inline-flex items-center px-3.5 py-2 rounded-lg text-sm font-semibold text-muted border border-border-dark hover:text-white hover:bg-surface-dark transition-all no-underline">
+                        Đăng nhập
+                    </a>
+                    <a asp-controller="Account" asp-action="Register"
+                       class="inline-flex items-center px-3.5 py-2 rounded-lg text-sm font-bold text-white bg-primary hover:bg-primary-h transition-all no-underline shadow-[0_0_12px_rgba(255,80,0,.25)]">
+                        Đăng ký
+                    </a>
+                }
+            </div>
+
+            <!-- Mobile toggle -->
+            <button id="snNavToggle" class="md:hidden ml-auto flex flex-col gap-1.5 p-1 bg-transparent border-none cursor-pointer">
+                <span class="block w-5 h-0.5 bg-muted rounded"></span>
+                <span class="block w-5 h-0.5 bg-muted rounded"></span>
+                <span class="block w-5 h-0.5 bg-muted rounded"></span>
+            </button>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="snMobileNav" class="hidden md:hidden max-w-[1400px] mx-auto pt-3 pb-1 border-t border-border-dark mt-3">
+            <div class="flex flex-col gap-1">
+                <a asp-controller="ServicePackage" asp-action="Index"
+                   class="px-3 py-2 rounded-lg text-sm font-semibold text-muted hover:text-white hover:bg-white/5 no-underline">Gói hội viên</a>
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <a asp-controller="Membership" asp-action="Status"
+                       class="px-3 py-2 rounded-lg text-sm font-semibold text-muted hover:text-white hover:bg-white/5 no-underline">Đơn của tôi</a>
+                }
+                <hr class="border-border-dark my-1" />
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    <form asp-controller="Account" asp-action="Logout" method="post" class="m-0">
+                        <button type="submit" class="w-full text-left px-3 py-2 text-sm font-semibold text-muted bg-transparent border-none cursor-pointer">Đăng xuất</button>
+                    </form>
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Login" class="px-3 py-2 text-sm font-semibold text-muted no-underline">Đăng nhập</a>
+                    <a asp-controller="Account" asp-action="Register" class="px-3 py-2 text-sm font-bold text-primary no-underline">Đăng ký</a>
+                }
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1">
+        @RenderBody()
+    </main>
+
+    <partial name="_Notification" />
+
+    <!-- Footer -->
+    <footer class="border-t border-border-dark bg-surface-dark py-6">
+        <div class="max-w-[1400px] mx-auto px-5 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded-md bg-primary flex items-center justify-center">
+                    <span class="material-symbols-outlined text-white" style="font-size:14px">fitness_center</span>
+                </div>
+                <span class="font-bold text-sm text-white">Skill.Net</span>
+            </div>
+            <p class="text-xs text-subtle m-0">&copy; 2026 Skill.Net. Bảo lưu mọi quyền.</p>
+            <div class="flex gap-5">
+                <a href="#" class="text-xs text-subtle hover:text-primary transition-colors no-underline">Điều khoản</a>
+                <a href="#" class="text-xs text-subtle hover:text-primary transition-colors no-underline">Bảo mật</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        document.getElementById('snNavToggle').addEventListener('click', function () {
+            document.getElementById('snMobileNav').classList.toggle('hidden');
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <script>
+            if (typeof posthog !== 'undefined') { posthog.identify('@User.Identity.Name'); }
+        </script>
+    }
+</body>
+</html>

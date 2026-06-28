@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /Admin/
+Disallow: /Membership/
+Disallow: /Account/
+Disallow: /hangfire/
+Allow: /ServicePackage
+Allow: /
+
+Sitemap: https://skillnet.vn/sitemap.xml

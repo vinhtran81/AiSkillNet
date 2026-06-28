@@ -1,0 +1,37 @@
+@if (TempData["Success"] is string success || TempData["Error"] is string error)
+{
+    <div class="sn-toast-container" id="snToastContainer">
+        @if (TempData["Success"] is string s)
+        {
+            <div class="sn-toast sn-toast-success">
+                <div class="sn-toast-icon"><span class="material-symbols-outlined">check_circle</span></div>
+                <div class="sn-toast-body">
+                    <div class="sn-toast-title">Thành công</div>
+                    <div class="sn-toast-msg">@s</div>
+                </div>
+                <button class="sn-toast-close" onclick="this.closest('.sn-toast').remove()">
+                    <span class="material-symbols-outlined" style="font-size:18px">close</span>
+                </button>
+            </div>
+        }
+        @if (TempData["Error"] is string e)
+        {
+            <div class="sn-toast sn-toast-error">
+                <div class="sn-toast-icon"><span class="material-symbols-outlined">error</span></div>
+                <div class="sn-toast-body">
+                    <div class="sn-toast-title">Có lỗi xảy ra</div>
+                    <div class="sn-toast-msg">@e</div>
+                </div>
+                <button class="sn-toast-close" onclick="this.closest('.sn-toast').remove()">
+                    <span class="material-symbols-outlined" style="font-size:18px">close</span>
+                </button>
+            </div>
+        }
+    </div>
+    <script>
+        setTimeout(function () {
+            var c = document.getElementById('snToastContainer');
+            if (c) c.style.opacity = '0', c.style.transition = 'opacity .4s', setTimeout(function(){ c.remove(); }, 400);
+        }, 5000);
+    </script>
+}

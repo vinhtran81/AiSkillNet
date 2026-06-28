@@ -1,0 +1,103 @@
+@model SkillNet.Web.ViewModels.MembershipRegisterFormModel
+@{
+    ViewData["Title"] = "Đăng ký hội viên";
+    ViewData["NoIndex"] = true;
+}
+
+<div style="max-width:760px;margin:0 auto;padding:2.5rem 1.5rem">
+    <div style="margin-bottom:2rem">
+        <h1 style="font-size:1.75rem;font-weight:800;letter-spacing:-.03em;margin-bottom:.3rem">Đăng ký hội viên</h1>
+        <p style="color:var(--text-2);font-size:.9rem">Điền thông tin để nộp đơn đăng ký gói hội viên.</p>
+    </div>
+
+    <form asp-action="Register" method="post" enctype="multipart/form-data" id="registerForm">
+        <div asp-validation-summary="All" class="validation-summary-errors mb-4" id="valSummary" style="display:none"></div>
+
+        <!-- Personal info -->
+        <div class="form-section" style="margin-bottom:1.25rem">
+            <div class="form-section-title">
+                <span class="material-symbols-outlined">person</span>
+                Thông tin cá nhân
+            </div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label asp-for="FullName" class="form-label"></label>
+                    <input asp-for="FullName" class="form-control" autocomplete="name" placeholder="Nguyễn Văn A" />
+                    <span asp-validation-for="FullName" class="field-validation-error"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="DateOfBirth" class="form-label"></label>
+                    <input asp-for="DateOfBirth" type="date" class="form-control"
+                           min="1920-01-01" max="@DateTime.Today.AddYears(-16).ToString("yyyy-MM-dd")" />
+                    <span asp-validation-for="DateOfBirth" class="field-validation-error"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="PhoneNumber" class="form-label"></label>
+                    <input asp-for="PhoneNumber" class="form-control" type="tel" autocomplete="tel" placeholder="0901234567" />
+                    <span asp-validation-for="PhoneNumber" class="field-validation-error"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="ServicePackageId" class="form-label"></label>
+                    <select asp-for="ServicePackageId" asp-items="Model.AvailablePackages" class="form-select">
+                        <option value="">-- Chọn gói --</option>
+                    </select>
+                    <span asp-validation-for="ServicePackageId" class="field-validation-error"></span>
+                </div>
+                <div class="col-12">
+                    <label asp-for="Address" class="form-label"></label>
+                    <input asp-for="Address" class="form-control" autocomplete="street-address" />
+                    <span asp-validation-for="Address" class="field-validation-error"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional info -->
+        <div class="form-section" style="margin-bottom:1.25rem">
+            <div class="form-section-title">
+                <span class="material-symbols-outlined">info</span>
+                Thông tin bổ sung
+            </div>
+            <div class="row g-3">
+                <div class="col-12">
+                    <label asp-for="Notes" class="form-label"></label>
+                    <textarea asp-for="Notes" class="form-control" rows="3" placeholder="Thông tin bổ sung (nếu có)..."></textarea>
+                    <span asp-validation-for="Notes" class="field-validation-error"></span>
+                </div>
+                <div class="col-12">
+                    <label asp-for="IdDocumentFile" class="form-label"></label>
+                    <input asp-for="IdDocumentFile" type="file" class="form-control" accept=".jpg,.jpeg,.png,.pdf" />
+                    <div class="form-text">Tùy chọn. Tối đa 5MB, định dạng jpg/png/pdf.</div>
+                    <span asp-validation-for="IdDocumentFile" class="field-validation-error"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div style="display:flex;gap:.75rem;align-items:center">
+            <button type="submit" class="btn btn-primary d-inline-flex align-items-center gap-2" id="submitBtn" style="min-height:46px">
+                <span id="btnText">Nộp đơn</span>
+                <span id="btnSpinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+                <span id="btnIcon" class="material-symbols-outlined" style="font-size:18px">send</span>
+            </button>
+            <a asp-controller="ServicePackage" asp-action="Index" class="btn btn-outline-secondary">Quay lại</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Show validation summary if errors
+        const summary = document.getElementById('valSummary');
+        if (summary && summary.querySelector('li')) summary.style.display = '';
+
+        document.getElementById('registerForm').addEventListener('submit', function (e) {
+            if (e.defaultPrevented) return;
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            document.getElementById('btnSpinner').classList.remove('d-none');
+            document.getElementById('btnIcon').style.display = 'none';
+            document.getElementById('btnText').textContent = 'Đang gửi...';
+        });
+    </script>
+}

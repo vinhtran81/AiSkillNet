@@ -1,0 +1,155 @@
+@model SkillNet.Web.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Đăng nhập";
+    ViewData["NoIndex"] = true;
+    var returnUrl = ViewData["ReturnUrl"] as string;
+}
+
+<div class="flex-1 flex items-center justify-center relative p-4 min-h-[calc(100vh-57px)]">
+    <!-- Background glows -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full blur-[120px]" style="background:rgba(255,80,0,.08)"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full blur-[100px]" style="background:rgba(99,102,241,.06)"></div>
+        <div class="absolute inset-0 opacity-[0.025]" style="background-image:radial-gradient(#FF5000 1px,transparent 1px);background-size:32px 32px"></div>
+    </div>
+
+    <!-- Card container -->
+    <div class="grid lg:grid-cols-2 w-full max-w-[1100px] h-auto lg:h-[680px] z-10 rounded-2xl overflow-hidden shadow-2xl border border-border-dark">
+
+        <!-- Left: Marketing -->
+        <div class="hidden lg:flex flex-col justify-between p-12 relative overflow-hidden" style="background:#0f0e0c">
+            <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0" style="background:linear-gradient(135deg,#1a1208 0%,#0c0a08 100%)"></div>
+                <div class="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl" style="background:rgba(255,80,0,.12)"></div>
+                <div class="absolute bottom-0 left-0 w-72 h-72 rounded-full blur-3xl" style="background:rgba(99,102,241,.08)"></div>
+            </div>
+
+            <div class="relative z-10">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border text-xs font-bold mb-6"
+                     style="background:rgba(255,80,0,.08);border-color:rgba(255,80,0,.2);color:#FF5000">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style="background:#FF5000"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2" style="background:#FF5000"></span>
+                    </span>
+                    Hệ thống đang hoạt động
+                </div>
+                <h2 class="text-4xl font-black leading-tight mb-4 text-white" style="letter-spacing:-.03em">
+                    Quản lý hội viên<br />thông minh hơn.
+                </h2>
+                <p class="text-lg max-w-sm leading-relaxed" style="color:#b0a090">
+                    Nền tảng tất cả trong một — đăng ký, theo dõi và chăm sóc hội viên của trung tâm bạn.
+                </p>
+            </div>
+
+            <div class="relative z-10 flex flex-col gap-3">
+                <div class="flex items-center gap-2.5">
+                    <span class="material-symbols-outlined text-primary" style="font-size:18px">check_circle</span>
+                    <span class="text-sm" style="color:#b0a090">Đăng ký hội viên online — nhanh chóng</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                    <span class="material-symbols-outlined text-primary" style="font-size:18px">check_circle</span>
+                    <span class="text-sm" style="color:#b0a090">Theo dõi trạng thái đơn minh bạch</span>
+                </div>
+                <div class="flex items-center gap-2.5">
+                    <span class="material-symbols-outlined text-primary" style="font-size:18px">check_circle</span>
+                    <span class="text-sm" style="color:#b0a090">Thông báo qua email & Zalo tức thì</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="flex flex-col justify-center px-8 py-12 md:px-12 lg:px-14" style="background:#131110">
+            <div class="w-full max-w-sm mx-auto">
+                <div class="mb-9">
+                    <h1 class="text-3xl font-black text-white mb-2" style="letter-spacing:-.03em">Chào mừng trở lại</h1>
+                    <p class="text-sm" style="color:#b0a090">Vui lòng nhập thông tin để đăng nhập.</p>
+                </div>
+
+                <form asp-action="Login" asp-route-returnUrl="@returnUrl" method="post" class="space-y-5">
+                    <div asp-validation-summary="All" id="valSummary"
+                         class="rounded-lg px-4 py-3 text-sm border" style="background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.25);color:#fca5a5;display:none"></div>
+
+                    <!-- Email -->
+                    <div class="space-y-1.5">
+                        <label asp-for="Email" class="block text-sm font-semibold" style="color:#d0c8c0">Email</label>
+                        <div class="relative" style="box-shadow:none">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none" style="color:#70645a">
+                                <span class="material-symbols-outlined" style="font-size:19px">person</span>
+                            </div>
+                            <input asp-for="Email" type="email" autocomplete="email" placeholder="email@example.com"
+                                   class="block w-full pl-10 pr-3 py-3 rounded-lg text-sm border text-white placeholder-subtle focus:outline-none focus:ring-0 transition-all"
+                                   style="background:#1a1815;border-color:#33302a;color:#f0ede6" />
+                        </div>
+                        <span asp-validation-for="Email" class="text-xs" style="color:#f87171"></span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="space-y-1.5">
+                        <label asp-for="Password" class="block text-sm font-semibold" style="color:#d0c8c0">Mật khẩu</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none" style="color:#70645a">
+                                <span class="material-symbols-outlined" style="font-size:19px">lock</span>
+                            </div>
+                            <input asp-for="Password" type="password" autocomplete="current-password" placeholder="••••••••"
+                                   class="block w-full pl-10 pr-3 py-3 rounded-lg text-sm border focus:outline-none focus:ring-0 transition-all"
+                                   style="background:#1a1815;border-color:#33302a;color:#f0ede6" />
+                        </div>
+                        <span asp-validation-for="Password" class="text-xs" style="color:#f87171"></span>
+                    </div>
+
+                    <!-- Remember me -->
+                    <div class="flex items-center gap-2">
+                        <input asp-for="RememberMe" type="checkbox" class="rounded" style="accent-color:#FF5000" />
+                        <label asp-for="RememberMe" class="text-sm" style="color:#b0a090">Ghi nhớ đăng nhập</label>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit"
+                            class="w-full flex justify-center items-center gap-2 py-3 px-4 rounded-lg text-sm font-bold text-white transition-all"
+                            style="background:#FF5000;box-shadow:0 0 20px rgba(255,80,0,.25)">
+                        Đăng nhập
+                        <span class="material-symbols-outlined" style="font-size:20px">arrow_forward</span>
+                    </button>
+                </form>
+
+                <!-- Divider -->
+                <div class="relative my-7">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t" style="border-color:#33302a"></div>
+                    </div>
+                    <div class="relative flex justify-center text-xs">
+                        <span class="px-3 text-sm" style="background:#131110;color:#70645a">Chưa có tài khoản?</span>
+                    </div>
+                </div>
+
+                <a asp-action="Register" asp-controller="Account"
+                   class="w-full flex justify-center items-center gap-2 py-2.5 px-4 rounded-lg text-sm font-semibold border transition-all no-underline"
+                   style="border-color:#33302a;color:#b0a090">
+                    Tạo tài khoản mới
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        (function () {
+            var s = document.getElementById('valSummary');
+            if (s && s.querySelector('li')) s.style.display = '';
+
+            // Style input focus
+            document.querySelectorAll('input[type=email],input[type=password]').forEach(function (el) {
+                el.addEventListener('focus', function () {
+                    this.style.borderColor = '#FF5000';
+                    this.style.boxShadow = '0 0 0 3px rgba(255,80,0,.12)';
+                });
+                el.addEventListener('blur', function () {
+                    this.style.borderColor = '#33302a';
+                    this.style.boxShadow = 'none';
+                });
+            });
+        })();
+    </script>
+}

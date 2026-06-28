@@ -1,0 +1,115 @@
+@model SkillNet.Web.ViewModels.ApplicationStatusViewModel
+@using SkillNet.Domain.Enums
+@{
+    ViewData["Title"] = "Đơn của tôi";
+    ViewData["NoIndex"] = true;
+
+    string statusClass = "", statusText = "";
+    if (Model.HasApplication)
+    {
+        statusClass = Model.Status switch
+        {
+            ApplicationStatus.Pending   => "status-pending",
+            ApplicationStatus.Approved  => "status-approved",
+            ApplicationStatus.Rejected  => "status-rejected",
+            ApplicationStatus.Cancelled => "status-cancelled",
+            _ => "status-cancelled"
+        };
+        statusText = Model.Status switch
+        {
+            ApplicationStatus.Pending   => "Đang chờ duyệt",
+            ApplicationStatus.Approved  => "Đã phê duyệt",
+            ApplicationStatus.Rejected  => "Từ chối",
+            ApplicationStatus.Cancelled => "Đã hủy",
+            _ => "Không rõ"
+        };
+    }
+}
+
+<div style="max-width:680px;margin:0 auto;padding:2.5rem 1.5rem">
+    <div style="margin-bottom:2rem">
+        <h1 style="font-size:1.75rem;font-weight:800;letter-spacing:-.03em;margin-bottom:.3rem">Đơn của tôi</h1>
+        <p style="color:var(--text-2);font-size:.9rem">Theo dõi trạng thái đơn đăng ký hội viên của bạn.</p>
+    </div>
+
+    @if (!Model.HasApplication)
+    {
+        <div class="empty-state" style="border:1px solid var(--border);border-radius:var(--r-xl)">
+            <span class="material-symbols-outlined">inbox</span>
+            <h3>Chưa có đơn đăng ký</h3>
+            <p>Bạn chưa nộp đơn đăng ký gói hội viên nào.</p>
+            <a asp-controller="ServicePackage" asp-action="Index" class="btn btn-primary mt-3 d-inline-flex align-items-center gap-2">
+                <span class="material-symbols-outlined" style="font-size:18px">explore</span>
+                Xem gói hội viên
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <span style="font-weight:700">@Model.ServicePackageName</span>
+                <span class="status-badge @statusClass">
+                    <span class="status-dot"></span>
+                    @statusText
+                </span>
+            </div>
+            <div class="card-body" style="padding:1.5rem">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem 2rem">
+                    <div>
+                        <div style="font-size:.75rem;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem">Ngày nộp đơn</div>
+                        <div style="font-weight:600">@Model.CreatedAt?.ToString("dd/MM/yyyy HH:mm")</div>
+                    </div>
+
+                    @if (Model.Status == ApplicationStatus.Pending)
+                    {
+                        <div>
+                            <div style="font-size:.75rem;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem">Đang chờ</div>
+                            <div style="font-weight:600">@Model.DaysPending ngày</div>
+                        </div>
+                    }
+                    @if (Model.Status == ApplicationStatus.Approved)
+                    {
+                        <div>
+                            <div style="font-size:.75rem;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem">Mã hội viên</div>
+                            <div style="font-weight:700;color:var(--success);font-size:1.1rem">@Model.MembershipCode</div>
+                        </div>
+                        <div>
+                            <div style="font-size:.75rem;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem">Ngày phê duyệt</div>
+                            <div style="font-weight:600">@Model.ProcessedAt?.ToString("dd/MM/yyyy")</div>
+                        </div>
+                    }
+                    @if (Model.Status == ApplicationStatus.Rejected && Model.RejectionReason != null)
+                    {
+                        <div style="grid-column:span 2">
+                            <div style="font-size:.75rem;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem">Lý do từ chối</div>
+                            <div style="color:#f87171;font-weight:600">@Model.RejectionReason</div>
+                        </div>
+                    }
+                </div>
+
+                @if (Model.Status == ApplicationStatus.Pending)
+                {
+                    <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border)">
+                        <form asp-action="Cancel" asp-route-id="@Model.ApplicationId" method="post"
+                              onsubmit="return confirm('Bạn có chắc muốn hủy đơn này?')">
+                            <button type="submit" class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center gap-1">
+                                <span class="material-symbols-outlined" style="font-size:16px">cancel</span>
+                                Hủy đơn
+                            </button>
+                        </form>
+                    </div>
+                }
+                @if (Model.Status is ApplicationStatus.Rejected or ApplicationStatus.Cancelled)
+                {
+                    <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border)">
+                        <a asp-controller="ServicePackage" asp-action="Index" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1">
+                            <span class="material-symbols-outlined" style="font-size:16px">add</span>
+                            Nộp đơn mới
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
